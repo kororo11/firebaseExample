@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+    <title>test 랍니다.</title>
+    <h1>Firebase Test</h1>
+    <p>Firebase console 에 데이터가 추가 되었는지 확인하세요.</p>
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDb3lV5ag000X--zWxMIEPfw0OqpTmHdYc",
+      authDomain: "fir-example-cb29e.firebaseapp.com",
+      databaseURL: "https://fir-example-cb29e.firebaseio.com",
+      projectId: "fir-example-cb29e",
+      storageBucket: "fir-example-cb29e.appspot.com",
+      messagingSenderId: "7187680450"
+    };
+    firebase.initializeApp(config);
+
+    var newPostKey = firebase.database().ref().child('posts').push().key;
+
+    var postData = {
+      brdno: newPostKey,
+      brdwriter: "홍길동",
+      brdtitle: "게시판 제목",
+      brdmemo: "게시물 내용",
+      brddate: Date.now()
+    };
+
+    var updates = {};
+    updates['/board' + newPostKey] = postData;
+    firebase.database().ref().update(updates);
+  </script>
+  </head>
+</html>
